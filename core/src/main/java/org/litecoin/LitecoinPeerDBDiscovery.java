@@ -16,13 +16,13 @@
 
 package org.litecoin;
 
-import com.google.infinitecoin.core.*;
-import com.google.infinitecoin.net.discovery.PeerDBDiscovery;
+import com.google.infinitecoinj.core.*;
+import com.google.infinitecoinj.net.discovery.PeerDBDiscovery;
 
 import java.io.File;
 import java.math.BigInteger;
 
-import com.google.infinitecoin.core.CoinDefinition;
+import com.google.infinitecoinj.core.CoinDefinition;
 
 /**
  * A version of PeerDBDiscovery that only returns nodes which support Bloom filters according to Litecoin's BLOOM bit

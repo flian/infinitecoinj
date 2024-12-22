@@ -1,13 +1,13 @@
 package wallettemplate;
 
 import com.aquafx_project.AquaFx;
-import com.google.infinitecoin.core.NetworkParameters;
-import com.google.infinitecoin.kits.WalletAppKit;
-import com.google.infinitecoin.params.MainNetParams;
-import com.google.infinitecoin.params.RegTestParams;
-import com.google.infinitecoin.store.BlockStoreException;
-import com.google.infinitecoin.utils.BriefLogFormatter;
-import com.google.infinitecoin.utils.Threading;
+import com.google.infinitecoinj.core.NetworkParameters;
+import com.google.infinitecoinj.kits.WalletAppKit;
+import com.google.infinitecoinj.params.MainNetParams;
+import com.google.infinitecoinj.params.RegTestParams;
+import com.google.infinitecoinj.store.BlockStoreException;
+import com.google.infinitecoinj.utils.BriefLogFormatter;
+import com.google.infinitecoinj.utils.Threading;
 import com.google.common.base.Throwables;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -29,7 +29,7 @@ import static wallettemplate.utils.GuiUtils.*;
 public class Main extends Application {
     public static String APP_NAME = "WalletTemplate";
 
-    public static NetworkParameters params = MainNetParams.get();
+    public static NetworkParameters params = RegTestParams.get();
     public static WalletAppKit bitcoin;
     public static Main instance;
 

@@ -1,8 +1,8 @@
 package wallettemplate.controls;
 
-import com.google.infinitecoin.core.Address;
-import com.google.infinitecoin.core.AddressFormatException;
-import com.google.infinitecoin.core.NetworkParameters;
+import com.google.infinitecoinj.core.Address;
+import com.google.infinitecoinj.core.AddressFormatException;
+import com.google.infinitecoinj.core.NetworkParameters;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import wallettemplate.utils.TextFieldValidator;

@@ -1,9 +1,9 @@
 package wallettemplate;
 
-import com.google.infinitecoin.core.AbstractWalletEventListener;
-import com.google.infinitecoin.core.DownloadListener;
-import com.google.infinitecoin.core.Utils;
-import com.google.infinitecoin.core.Wallet;
+import com.google.infinitecoinj.core.AbstractWalletEventListener;
+import com.google.infinitecoinj.core.DownloadListener;
+import com.google.infinitecoinj.core.Utils;
+import com.google.infinitecoinj.core.Wallet;
 import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
