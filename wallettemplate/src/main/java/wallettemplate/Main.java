@@ -1,13 +1,13 @@
 package wallettemplate;
 
 import com.aquafx_project.AquaFx;
-import com.google.bitcoin.core.NetworkParameters;
-import com.google.bitcoin.kits.WalletAppKit;
-import com.google.bitcoin.params.MainNetParams;
-import com.google.bitcoin.params.RegTestParams;
-import com.google.bitcoin.store.BlockStoreException;
-import com.google.bitcoin.utils.BriefLogFormatter;
-import com.google.bitcoin.utils.Threading;
+import com.google.infinitecoin.core.NetworkParameters;
+import com.google.infinitecoin.kits.WalletAppKit;
+import com.google.infinitecoin.params.MainNetParams;
+import com.google.infinitecoin.params.RegTestParams;
+import com.google.infinitecoin.store.BlockStoreException;
+import com.google.infinitecoin.utils.BriefLogFormatter;
+import com.google.infinitecoin.utils.Threading;
 import com.google.common.base.Throwables;
 import javafx.application.Application;
 import javafx.application.Platform;
