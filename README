@@ -33,5 +33,20 @@ regtest docs:
 https://medium.com/@weiliy/%E6%90%AD%E5%BB%BA-bitcoin-%E6%9C%AC%E5%9C%B0%E5%9B%9E%E5%BD%92%E6%B5%8B%E8%AF%95%E7%BD%91-regtest-d595d1746413
 
 for here we use regtest~~
-./Infinitecoin-Qt -regtest
+./Infinitecoin-Qt -regtest -reindex -txidex
 
+Infinitecoin-cli.exe -regtest -rpcport=19444 -rpcuser=test -rpcpassword=abcd11111 getnewaddress
+Infinitecoin-cli.exe -regtest -rpcport=19444 -rpcuser=test -rpcpassword=abcd11111 generate 150
+Infinitecoin-cli.exe -datadir=C:\Users\foy\AppData\Roaming\Infinitecoin -regtest generate 150
+
+Infinitecoin-cli.exe -regtest -rpcuser=test -rpcpassword=abcd11111 createwallet "wallet"
+
+infinitecoin-qt.exe -regtest -connect=0 -txindex -server -rest
+
+rpc client:
+infinitecoin-cli.exe  -regtest  -rpcport=19444 getnewaddress
+
+127.0.0.1:19444
+## start regtest node
+infinitecoind.exe -regtest -rescan -reindex -connect=0 -txindex -server -rest -printtoconsole  -bind=127.0.0.1
+infinitecoin-qt.exe -regtest -rescan -reindex -connect=0 -txindex -server -rest -bind=127.0.0.1 -printtoconsole
