@@ -36,6 +36,8 @@ public class Main extends Application {
     private StackPane uiStack;
     private Pane mainUI;
 
+    private static String regtestHost = null;
+
     @Override
     public void start(Stage mainWindow) throws Exception {
         instance = this;
@@ -79,7 +81,8 @@ public class Main extends Application {
         // Create the app kit. It won't do any heavyweight initialization until after we start it.
         bitcoin = new WalletAppKit(params, new File("."), APP_NAME);
         if (params == RegTestParams.get()) {
-            bitcoin.connectToLocalHost();   // You should run a regtest mode bitcoind locally.
+            //bitcoin.connectToLocalHost();   // You should run a regtest mode bitcoind locally.
+            bitcoin.connectToGivenHost(regtestHost);
         } else if (params == MainNetParams.get()) {
             // Checkpoints are block headers that ship inside our app: for a new user, we pick the last header
             // in the checkpoints file and then download the rest from the network. It makes things much faster.
@@ -167,6 +170,11 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        for(int i=0;i<args.length;i++){
+            if(args[i].equals("-regtest")){
+                regtestHost = args[i+1];
+            }
+        }
         launch(args);
     }
 }

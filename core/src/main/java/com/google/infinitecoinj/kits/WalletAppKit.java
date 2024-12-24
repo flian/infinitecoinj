@@ -90,6 +90,19 @@ public class WalletAppKit extends AbstractIdleService {
         return this;
     }
 
+    public WalletAppKit connectToGivenHost(String ip){
+        if(null == ip && ip.isEmpty()){
+            return connectToLocalHost();
+        }
+        try {
+            final InetAddress localHost =  InetAddress.getByName(ip);
+            return setPeerNodes(new PeerAddress(localHost, params.getPort()));
+        } catch (UnknownHostException e) {
+            // Borked machine with no loopback adapter configured properly.
+            throw new RuntimeException(e);
+        }
+    }
+
     /** Will only connect to localhost. Cannot be called after startup. */
     public WalletAppKit connectToLocalHost() {
         try {
