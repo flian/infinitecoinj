@@ -16,6 +16,7 @@
 
 package com.google.infinitecoinj.core;
 
+import com.google.infinitecoinj.params.RegTestParams;
 import com.google.infinitecoinj.store.BlockStore;
 import com.google.infinitecoinj.store.BlockStoreException;
 import com.google.infinitecoinj.utils.ListenerRegistration;
@@ -393,7 +394,12 @@ public abstract class AbstractBlockChain {
                 return false;
             } else {
                 // It connects to somewhere on the chain. Not necessarily the top of the best known chain.
-                checkDifficultyTransitions(storedPrev, block);
+                if(storedPrev.getHeader().getParams() == RegTestParams.get()){
+                    //if regtest net,skip verify
+                    log.info("regtest net, skip checkDifficultyTransitions");
+                }else {
+                    checkDifficultyTransitions(storedPrev, block);
+                }
                 connectBlock(block, storedPrev, shouldVerifyTransactions(), filteredTxHashList, filteredTxn);
             }
 

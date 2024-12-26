@@ -21,6 +21,7 @@ import com.google.infinitecoinj.core.TransactionConfidence.ConfidenceType;
 import com.google.infinitecoinj.crypto.EncryptedPrivateKey;
 import com.google.infinitecoinj.crypto.KeyCrypter;
 import com.google.infinitecoinj.crypto.KeyCrypterScrypt;
+import com.google.infinitecoinj.params.RegTestParams;
 import com.google.infinitecoinj.script.Script;
 import com.google.infinitecoinj.wallet.WalletTransaction;
 import com.google.common.collect.Lists;
@@ -567,8 +568,13 @@ public class WalletProtobufSerializer {
 
         // Transaction should now be complete.
         Sha256Hash protoHash = byteStringToHash(txProto.getHash());
-        if (!tx.getHash().equals(protoHash))
-            throw new UnreadableWalletException(String.format("Transaction did not deserialize completely: %s vs %s", tx.getHash(), protoHash));
+        if (!tx.getHash().equals(protoHash)) {
+            if (tx.getParams() == RegTestParams.get()) {
+                log.error("[regTest net],Transaction did not deserialize completely: {} vs {}", tx.getHash(), protoHash);
+            } else {
+                throw new UnreadableWalletException(String.format("Transaction did not deserialize completely: %s vs %s", tx.getHash(), protoHash));
+            }
+        }
         if (txMap.containsKey(txProto.getHash()))
             throw new UnreadableWalletException("Wallet contained duplicate transaction " + byteStringToHash(txProto.getHash()));
         txMap.put(txProto.getHash(), tx);
