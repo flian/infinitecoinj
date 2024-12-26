@@ -170,6 +170,10 @@ public class CoinDefinition {
     public static final String ID_MAINNET = "org.infinitcoin.production";
     /** The string returned by getId() for the testnet. */
     public static final String ID_TESTNET = "org.infinitcoin.test";
+
+    public static final String ID_REG_TEST = "org.infinitcoin.regtest";
+
+
     /** Unit test network. */
     public static final String ID_UNITTESTNET = "com.google.infinitcoin.unittest";
 

@@ -38,6 +38,8 @@ public class Main extends Application {
 
     private static String regtestHost = null;
 
+    private static boolean isRegTest = false;
+
     @Override
     public void start(Stage mainWindow) throws Exception {
         instance = this;
@@ -80,7 +82,7 @@ public class Main extends Application {
         Threading.USER_THREAD = Platform::runLater;
         // Create the app kit. It won't do any heavyweight initialization until after we start it.
         bitcoin = new WalletAppKit(params, new File("."), APP_NAME);
-        if (params == RegTestParams.get()) {
+        if (params == RegTestParams.get() && isRegTest) {
             //bitcoin.connectToLocalHost();   // You should run a regtest mode bitcoind locally.
             bitcoin.connectToGivenHost(regtestHost);
         } else if (params == MainNetParams.get()) {
@@ -172,7 +174,12 @@ public class Main extends Application {
     public static void main(String[] args) {
         for(int i=0;i<args.length;i++){
             if(args[i].equals("-regtest")){
-                regtestHost = args[i+1];
+                isRegTest = true;
+                if(i<args.length-1){
+                    regtestHost = args[i+1];
+                }else {
+                    regtestHost = "127.0.0.1";
+                }
             }
         }
         launch(args);
