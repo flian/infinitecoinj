@@ -2,21 +2,18 @@
 
 <?scenebuilder-classpath-element ../../../../target/classes?>
 
-<?scenebuilder-classpath-element ../../../../../core/target/digitalcoinj-0.12-SNAPSHOT.jar?>
+<?scenebuilder-classpath-element ../../../../../core/target/infinitecoinj-0.12.6-SNAPSHOT?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.input.*?>
+<?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
-<?import wallettemplate.controls.*?>
-<?import wallettemplate.controls.ClickableBitcoinAddress ?>
-
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import wallettemplate.controls.ClickableBitcoinAddress?>
 <AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="200.0" minWidth="300.0" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="wallettemplate.Controller">
   <children>
     <Label layoutX="14.0" layoutY="14.0" text="Balance">
