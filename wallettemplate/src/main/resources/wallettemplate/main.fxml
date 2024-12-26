@@ -62,7 +62,7 @@
         </ColorAdjust>
       </effect>
       <image>
-        <Image url="@bitcoin_logo_plain.png" />
+        <Image url="@ifc.png" />
       </image>
     </ImageView>
     <ClickableBitcoinAddress fx:id="addressControl" layoutY="45.0" prefHeight="21.0" prefWidth="391.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="195.0" />
@@ -72,5 +72,7 @@
       </children>
     </StackPane>
     <Button id="sendMoneyOut" fx:id="sendMoneyOutBtn" alignment="CENTER" mnemonicParsing="false" onAction="#sendMoneyOut" text="Send money out" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="17.0" />
+    <PasswordField fx:id="password" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="67.0" promptText="input your password if present"/>
+    <Button id="createNewAddress" fx:id="createNewAddressBtn" onAction="#createNewAddress" text="create a new address" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="117.0" />
   </children>
 </AnchorPane>

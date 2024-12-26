@@ -6,17 +6,19 @@ import com.google.infinitecoinj.core.Utils;
 import com.google.infinitecoinj.core.Wallet;
 import javafx.animation.*;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import javafx.util.converter.NumberStringConverter;
 import wallettemplate.controls.ClickableBitcoinAddress;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static wallettemplate.Main.bitcoin;
 import static wallettemplate.utils.GuiUtils.checkGuiThread;
@@ -31,6 +33,11 @@ public class Controller {
     public HBox controlsBox;
     public Label balance;
     public Button sendMoneyOutBtn;
+
+    public PasswordField password;
+
+    public Button createNewAddressBtn;
+
     public ClickableBitcoinAddress addressControl;
 
     // Called by FXMLLoader.
@@ -45,9 +52,19 @@ public class Controller {
         refreshBalanceLabel();
     }
 
+    public void createNewAddress(ActionEvent event){
+        //TODO create new address here
+    }
+
     public void sendMoneyOut(ActionEvent event) {
         // Hide this UI and show the send money UI. This UI won't be clickable until the user dismisses send_money.
-        Main.instance.overlayUI("send_money.fxml");
+        Main.OverlayUI<SendMoneyController> newUI =  Main.instance.overlayUI("send_money.fxml");
+        SendMoneyController sendMoneyController = newUI.controller;
+        //set change address select.
+        List<String> addressList = bitcoin.wallet().getKeys().stream().map(k->k.toAddress(Main.params).toString()).collect(Collectors.toList());
+        sendMoneyController.changeAddress.setItems(FXCollections.observableArrayList(addressList));
+        //set transfer amount
+        sendMoneyController.amount.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
     }
 
     public class ProgressBarUpdater extends DownloadListener {

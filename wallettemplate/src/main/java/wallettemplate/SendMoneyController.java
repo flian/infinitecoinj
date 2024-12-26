@@ -5,9 +5,7 @@ import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import wallettemplate.controls.BitcoinAddressValidator;
 
 import static wallettemplate.utils.GuiUtils.crashAlert;
@@ -16,8 +14,18 @@ import static wallettemplate.utils.GuiUtils.informationalAlert;
 public class SendMoneyController {
     public Button sendBtn;
     public Button cancelBtn;
+
     public TextField address;
+    public TextField amount;
+    public PasswordField password;
+    public ChoiceBox<String> changeAddress;
+
     public Label titleLabel;
+
+    public Label addressLabel;
+    public Label amountLabel;
+    public Label passwordLabel;
+    public Label changeAddressLabel;
 
     public Main.OverlayUI overlayUi;
 
