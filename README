@@ -33,7 +33,7 @@ regtest docs:
 https://medium.com/@weiliy/%E6%90%AD%E5%BB%BA-bitcoin-%E6%9C%AC%E5%9C%B0%E5%9B%9E%E5%BD%92%E6%B5%8B%E8%AF%95%E7%BD%91-regtest-d595d1746413
 
 for here we use regtest~~
-./Infinitecoin-Qt -regtest -reindex -txidex
+./Infinitecoin-Qt -regtest -reindex -txindex
 
 Infinitecoin-cli.exe -regtest -rpcport=19444 -rpcuser=test -rpcpassword=abcd11111 getnewaddress
 Infinitecoin-cli.exe -regtest -rpcport=19444 -rpcuser=test -rpcpassword=abcd11111 generate 150

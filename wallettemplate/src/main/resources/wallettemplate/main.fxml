@@ -34,7 +34,7 @@
             <Color blue="0.750" green="0.750" red="0.750" fx:id="x2" />
           </textFill>
         </Label>
-        <Label font="$x1" text="BTC" textFill="$x2" />
+        <Label font="$x1" text="IFC" textFill="$x2" />
       </children>
     </HBox>
     <VBox fx:id="syncBox" maxHeight="-1.0" prefHeight="46.0" prefWidth="243.0" spacing="10.0" translateY="0.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
