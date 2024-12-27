@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import org.slf4j.LoggerFactory;
 import wallettemplate.utils.GuiUtils;
 import wallettemplate.utils.TextFieldValidator;
 
@@ -27,9 +28,13 @@ import java.net.URL;
 import static wallettemplate.utils.GuiUtils.*;
 
 public class Main extends Application {
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(Main.class);
     public static String APP_NAME = "WalletTemplate";
 
-    public static NetworkParameters params = RegTestParams.get();
+    public static NetworkParameters params = MainNetParams.get();
+    public static String walletFolder = "mainNet";
+    public boolean loadCheckPoint = false;
+
     public static WalletAppKit infinitecoin;
     public static Main instance;
 
@@ -82,7 +87,7 @@ public class Main extends Application {
         // a future version.
         Threading.USER_THREAD = Platform::runLater;
         // Create the app kit. It won't do any heavyweight initialization until after we start it.
-        infinitecoin = new WalletAppKit(params, new File("."), APP_NAME);
+        infinitecoin = new WalletAppKit(params, new File("./"+walletFolder), APP_NAME);
         if (params == RegTestParams.get() && isRegTest) {
             //bitcoin.connectToLocalHost();   // You should run a regtest mode bitcoind locally.
             infinitecoin.connectToGivenHost(regtestHost);
@@ -91,7 +96,11 @@ public class Main extends Application {
             // in the checkpoints file and then download the rest from the network. It makes things much faster.
             // Checkpoint files are made using the BuildCheckpoints tool and usually we have to download the
             // last months worth or more (takes a few seconds).
-            infinitecoin.setCheckpoints(getClass().getResourceAsStream("mainNet/checkpoints"));
+            if(loadCheckPoint){
+                log.info("enable checkpoint,load checkPoint...");
+                infinitecoin.setCheckpoints(getClass().getResourceAsStream("mainNet/checkpoints"));
+                log.info("enable checkpoint,load checkPoint done");
+            }
         }
 
         // Now configure and start the appkit. This will take a second or two - we could show a temporary splash screen
@@ -175,6 +184,9 @@ public class Main extends Application {
     public static void main(String[] args) {
         for(int i=0;i<args.length;i++){
             if(args[i].equals("-regtest")){
+                //reg test net
+                params = RegTestParams.get();
+                walletFolder = "regTestNet";
                 isRegTest = true;
                 if(i<args.length-1){
                     regtestHost = args[i+1];
