@@ -30,7 +30,7 @@ public class Main extends Application {
     public static String APP_NAME = "WalletTemplate";
 
     public static NetworkParameters params = RegTestParams.get();
-    public static WalletAppKit bitcoin;
+    public static WalletAppKit infinitecoin;
     public static Main instance;
 
     private StackPane uiStack;
@@ -82,28 +82,28 @@ public class Main extends Application {
         // a future version.
         Threading.USER_THREAD = Platform::runLater;
         // Create the app kit. It won't do any heavyweight initialization until after we start it.
-        bitcoin = new WalletAppKit(params, new File("."), APP_NAME);
+        infinitecoin = new WalletAppKit(params, new File("."), APP_NAME);
         if (params == RegTestParams.get() && isRegTest) {
             //bitcoin.connectToLocalHost();   // You should run a regtest mode bitcoind locally.
-            bitcoin.connectToGivenHost(regtestHost);
+            infinitecoin.connectToGivenHost(regtestHost);
         } else if (params == MainNetParams.get()) {
             // Checkpoints are block headers that ship inside our app: for a new user, we pick the last header
             // in the checkpoints file and then download the rest from the network. It makes things much faster.
             // Checkpoint files are made using the BuildCheckpoints tool and usually we have to download the
             // last months worth or more (takes a few seconds).
-            bitcoin.setCheckpoints(getClass().getResourceAsStream("checkpoints"));
+            infinitecoin.setCheckpoints(getClass().getResourceAsStream("mainNet/checkpoints"));
         }
 
         // Now configure and start the appkit. This will take a second or two - we could show a temporary splash screen
         // or progress widget to keep the user engaged whilst we initialise, but we don't.
-        bitcoin.setDownloadListener(controller.progressBarUpdater())
+        infinitecoin.setDownloadListener(controller.progressBarUpdater())
                .setBlockingStartup(false)
                .setUserAgent(APP_NAME, "1.0")
                .startAndWait();
         // Don't make the user wait for confirmations for now, as the intention is they're sending it their own money!
-        bitcoin.wallet().allowSpendingUnconfirmedTransactions();
-        bitcoin.peerGroup().setMaxConnections(11);
-        System.out.println(bitcoin.wallet());
+        infinitecoin.wallet().allowSpendingUnconfirmedTransactions();
+        infinitecoin.peerGroup().setMaxConnections(11);
+        System.out.println(infinitecoin.wallet());
         controller.onBitcoinSetup();
         mainWindow.show();
     }
@@ -168,7 +168,7 @@ public class Main extends Application {
 
     @Override
     public void stop() throws Exception {
-        bitcoin.stopAndWait();
+        infinitecoin.stopAndWait();
         super.stop();
     }
 
