@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static wallettemplate.Main.bitcoin;
+import static wallettemplate.Main.infinitecoin;
 import static wallettemplate.utils.GuiUtils.checkGuiThread;
 
 /**
@@ -47,8 +47,8 @@ public class Controller {
     }
 
     public void onBitcoinSetup() {
-        bitcoin.wallet().addEventListener(new BalanceUpdater());
-        addressControl.setAddress(bitcoin.wallet().getKeys().get(0).toAddress(Main.params).toString());
+        infinitecoin.wallet().addEventListener(new BalanceUpdater());
+        addressControl.setAddress(infinitecoin.wallet().getKeys().get(0).toAddress(Main.params).toString());
         refreshBalanceLabel();
     }
 
@@ -61,7 +61,7 @@ public class Controller {
         Main.OverlayUI<SendMoneyController> newUI =  Main.instance.overlayUI("send_money.fxml");
         SendMoneyController sendMoneyController = newUI.controller;
         //set change address select.
-        List<String> addressList = bitcoin.wallet().getKeys().stream().map(k->k.toAddress(Main.params).toString()).collect(Collectors.toList());
+        List<String> addressList = infinitecoin.wallet().getKeys().stream().map(k->k.toAddress(Main.params).toString()).collect(Collectors.toList());
         sendMoneyController.changeAddress.setItems(FXCollections.observableArrayList(addressList));
         //set transfer amount
         sendMoneyController.amount.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
@@ -111,7 +111,7 @@ public class Controller {
     }
 
     public void refreshBalanceLabel() {
-        final BigInteger amount = bitcoin.wallet().getBalance(Wallet.BalanceType.ESTIMATED);
+        final BigInteger amount = infinitecoin.wallet().getBalance(Wallet.BalanceType.ESTIMATED);
         balance.setText(Utils.bitcoinValueToFriendlyString(amount));
     }
 }

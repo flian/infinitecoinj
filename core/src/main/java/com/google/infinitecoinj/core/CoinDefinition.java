@@ -167,7 +167,7 @@ public class CoinDefinition {
 
     /** The string returned by getId() for the main, production network where people trade things. */
 
-    public static final String ID_MAINNET = "org.infinitcoin.production";
+    public static final String ID_MAINNET = "org.infinitcoin.main";
     /** The string returned by getId() for the testnet. */
     public static final String ID_TESTNET = "org.infinitcoin.test";
 
