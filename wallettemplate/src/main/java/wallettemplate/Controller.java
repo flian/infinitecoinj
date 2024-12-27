@@ -11,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import javafx.util.converter.NumberStringConverter;
+import org.slf4j.LoggerFactory;
 import wallettemplate.controls.ClickableBitcoinAddress;
 import wallettemplate.utils.WalletUtils;
 
@@ -27,6 +28,7 @@ import static wallettemplate.utils.GuiUtils.checkGuiThread;
  * after. This class handles all the updates and event handling for the main UI.
  */
 public class Controller {
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(Controller.class);
     public ProgressBar syncProgress;
     public VBox syncBox;
     public HBox controlsBox;
@@ -71,6 +73,7 @@ public class Controller {
         }else {
             infinitecoin.wallet().addKey(new ECKey());
         }
+        log.info("create new address success:{}",WalletUtils.getLastAddress(infinitecoin.wallet()));
         showAlertMsg("create newAddress success,address is:"+WalletUtils.getLastAddress(infinitecoin.wallet()));
         msgAlert.show();
         password.clear();
