@@ -59,7 +59,8 @@ public class Main extends Application {
 
     private void init(Stage mainWindow) throws IOException {
         if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-            AquaFx.style();
+            //FIXME Using it will cause issue in mac??
+           // AquaFx.style();
         }
         // Load the GUI. The Controller class will be automagically created and wired up.
         URL location = getClass().getResource("main.fxml");
