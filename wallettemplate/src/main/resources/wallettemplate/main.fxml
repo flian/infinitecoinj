@@ -71,5 +71,7 @@
     <Button id="sendMoneyOut" fx:id="sendMoneyOutBtn" alignment="CENTER" mnemonicParsing="false" onAction="#sendMoneyOut" text="Send money out" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="17.0" />
     <PasswordField fx:id="password" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="67.0" promptText="input your password if present"/>
     <Button id="createNewAddress" fx:id="createNewAddressBtn" onAction="#createNewAddress" text="create a new address" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="117.0" />
+    <PasswordField fx:id="newPassword" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="167.0" promptText="new password here"/>
+    <Button id="changePassword" fx:id="changePasswordBtn" onAction="#changePassword" text="change your password" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="217.0" />
   </children>
 </AnchorPane>

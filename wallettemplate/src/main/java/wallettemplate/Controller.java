@@ -1,9 +1,7 @@
 package wallettemplate;
 
-import com.google.infinitecoinj.core.AbstractWalletEventListener;
-import com.google.infinitecoinj.core.DownloadListener;
-import com.google.infinitecoinj.core.Utils;
-import com.google.infinitecoinj.core.Wallet;
+import com.google.infinitecoinj.core.*;
+import com.google.zxing.common.StringUtils;
 import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -14,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import javafx.util.converter.NumberStringConverter;
 import wallettemplate.controls.ClickableBitcoinAddress;
+import wallettemplate.utils.WalletUtils;
 
 import java.math.BigInteger;
 import java.util.Date;
@@ -35,15 +34,21 @@ public class Controller {
     public Button sendMoneyOutBtn;
 
     public PasswordField password;
-
     public Button createNewAddressBtn;
 
+    public PasswordField newPassword;
+
+    public Button changePasswordBtn;
+
     public ClickableBitcoinAddress addressControl;
+
+    public Alert msgAlert;
 
     // Called by FXMLLoader.
     public void initialize() {
         syncProgress.setProgress(-1);
         addressControl.setOpacity(0.0);
+        msgAlert = new Alert(Alert.AlertType.CONFIRMATION);
     }
 
     public void onBitcoinSetup() {
@@ -53,9 +58,53 @@ public class Controller {
     }
 
     public void createNewAddress(ActionEvent event){
-        //TODO create new address here
+        //create new address here
+        String oldPassword = password.getText();
+        if(infinitecoin.wallet().isEncrypted()){
+            boolean isPassWordOK = infinitecoin.wallet().checkPassword(oldPassword);
+            if(isPassWordOK){
+                infinitecoin.wallet().addNewEncryptedKey(oldPassword);
+            }else {
+                showAlertMsg("wrong password!!");
+                return;
+            }
+        }else {
+            infinitecoin.wallet().addKey(new ECKey());
+        }
+        showAlertMsg("create newAddress success,address is:"+WalletUtils.getLastAddress(infinitecoin.wallet()));
+        msgAlert.show();
+        password.clear();
+        newPassword.clear();
     }
 
+    public void changePassword(ActionEvent event){
+        String oldPassword = password.getText();
+        String newPasswordStr = newPassword.getText();
+        if(null == newPasswordStr || newPasswordStr.isEmpty()){
+            showAlertMsg("please input your new password!!");
+            return;
+        }
+        if(infinitecoin.wallet().isEncrypted()){
+            boolean isPassWordOK = infinitecoin.wallet().checkPassword(oldPassword);
+            if(isPassWordOK){
+                infinitecoin.wallet().decrypt(infinitecoin.wallet().getKeyCrypter().deriveKey(oldPassword));
+                infinitecoin.wallet().encrypt(newPasswordStr);
+            }else {
+                showAlertMsg("old password wrong,forget your password??");
+                return;
+            }
+        }else {
+            infinitecoin.wallet().encrypt(newPasswordStr);
+        }
+        showAlertMsg("change password ok~~ please remember your new password~~ it's very important！！！！");
+        password.clear();
+        newPassword.clear();
+    }
+
+    public void showAlertMsg(String msg){
+        msgAlert.setContentText(msg);
+        msgAlert.show();
+    }
     public void sendMoneyOut(ActionEvent event) {
         // Hide this UI and show the send money UI. This UI won't be clickable until the user dismisses send_money.
         Main.OverlayUI<SendMoneyController> newUI =  Main.instance.overlayUI("send_money.fxml");
