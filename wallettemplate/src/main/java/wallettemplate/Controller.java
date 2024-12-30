@@ -44,6 +44,8 @@ public class Controller {
 
     public ClickableBitcoinAddress addressControl;
 
+    public ListView<ClickableBitcoinAddress> addressListView;
+
     public Alert msgAlert;
 
     // Called by FXMLLoader.
@@ -56,11 +58,26 @@ public class Controller {
     public void onBitcoinSetup() {
         infinitecoin.wallet().addEventListener(new BalanceUpdater());
         addressControl.setAddress(infinitecoin.wallet().getKeys().get(0).toAddress(Main.params).toString());
+        refreshAddress();
         refreshBalanceLabel();
+    }
+
+    public void refreshAddress(){
+        addressListView.getItems().clear();
+        List<ECKey> listKeys = infinitecoin.wallet().getKeys();
+        for(ECKey key:listKeys){
+            ClickableBitcoinAddress clickableBitcoinAddress = new ClickableBitcoinAddress();
+            clickableBitcoinAddress.setAddress(key.toAddress(Main.params).toString());
+            addressListView.getItems().add(clickableBitcoinAddress);
+        }
     }
 
     public void createNewAddress(ActionEvent event){
         //create new address here
+        if(infinitecoin.wallet().getKeys().size() > 7){
+            showAlertMsg("max address reached,max allow address is 8.");
+            return;
+        }
         String oldPassword = password.getText();
         if(infinitecoin.wallet().isEncrypted()){
             boolean isPassWordOK = infinitecoin.wallet().checkPassword(oldPassword);
@@ -75,7 +92,7 @@ public class Controller {
         }
         log.info("create new address success:{}",WalletUtils.getLastAddress(infinitecoin.wallet()));
         showAlertMsg("create newAddress success,address is:"+WalletUtils.getLastAddress(infinitecoin.wallet()));
-        msgAlert.show();
+        refreshAddress();
         password.clear();
         newPassword.clear();
     }
