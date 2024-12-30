@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import wallettemplate.controls.BitcoinAddressValidator;
 
+import static wallettemplate.Main.infinitecoin;
 import static wallettemplate.utils.GuiUtils.crashAlert;
 import static wallettemplate.utils.GuiUtils.informationalAlert;
 
@@ -29,11 +30,14 @@ public class SendMoneyController {
 
     public Main.OverlayUI overlayUi;
 
+    public Alert msgAlert;
+
     private Wallet.SendResult sendResult;
 
     // Called by FXMLLoader
     public void initialize() {
         new BitcoinAddressValidator(Main.params, address, sendBtn);
+        msgAlert = new Alert(Alert.AlertType.CONFIRMATION);
     }
 
     public void cancel(ActionEvent event) {
@@ -41,6 +45,15 @@ public class SendMoneyController {
     }
 
     public void send(ActionEvent event) {
+        String typedPassword = password.getText();
+        if(infinitecoin.wallet().isEncrypted() && (null == typedPassword || typedPassword.isEmpty())){
+            showAlertMsg("wallet is encrypted,please provide password first!!!");
+            return;
+        }
+        if(infinitecoin.wallet().isEncrypted() && !infinitecoin.wallet().checkPassword(typedPassword)){
+            showAlertMsg("password is not right,please try again?!!!");
+            return;
+        }
         try {
             Address destination = new Address(Main.params, address.getText());
             Wallet.SendRequest req = Wallet.SendRequest.emptyWallet(destination);
@@ -77,5 +90,10 @@ public class SendMoneyController {
     private void updateTitleForBroadcast() {
         final int peers = sendResult.tx.getConfidence().numBroadcastPeers();
         titleLabel.setText(String.format("Broadcasting ... seen by %d peers", peers));
+    }
+
+    public void showAlertMsg(String msg){
+        msgAlert.setContentText(msg);
+        msgAlert.show();
     }
 }
