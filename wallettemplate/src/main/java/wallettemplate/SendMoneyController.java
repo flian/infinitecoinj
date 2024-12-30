@@ -6,13 +6,18 @@ import com.google.common.util.concurrent.Futures;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import org.slf4j.LoggerFactory;
 import wallettemplate.controls.BitcoinAddressValidator;
+
+import java.math.BigInteger;
 
 import static wallettemplate.Main.infinitecoin;
 import static wallettemplate.utils.GuiUtils.crashAlert;
 import static wallettemplate.utils.GuiUtils.informationalAlert;
 
 public class SendMoneyController {
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(SendMoneyController.class);
+
     public Button sendBtn;
     public Button cancelBtn;
 
@@ -38,6 +43,7 @@ public class SendMoneyController {
     public void initialize() {
         new BitcoinAddressValidator(Main.params, address, sendBtn);
         msgAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        changeAddress.getSelectionModel().selectFirst();
     }
 
     public void cancel(ActionEvent event) {
@@ -56,8 +62,18 @@ public class SendMoneyController {
         }
         try {
             Address destination = new Address(Main.params, address.getText());
-            Wallet.SendRequest req = Wallet.SendRequest.emptyWallet(destination);
+            log.info("send coin to address:{},amount:{}",address.getText(),amount.getText());
+            //Wallet.SendRequest req = Wallet.SendRequest.emptyWallet(destination);
+            Wallet.SendRequest req = Wallet.SendRequest.to(destination,Utils.toNanoCoins(amount.getText()));
+            //set fee and fee perKb to 1
+            req.fee = BigInteger.ONE;
+            req.feePerKb = BigInteger.ONE;
             Main.infinitecoin.wallet().sendCoins(req);
+            if(infinitecoin.wallet().isEncrypted()){
+                req.aesKey = infinitecoin.wallet().getKeyCrypter().deriveKey(typedPassword);
+            }
+            log.info("set change address:{}",changeAddress.getValue());
+            req.changeAddress = new Address(Main.params, changeAddress.getValue());
             Futures.addCallback(sendResult.broadcastComplete, new FutureCallback<Transaction>() {
                 @Override
                 public void onSuccess(Transaction result) {

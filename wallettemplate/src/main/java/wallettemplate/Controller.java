@@ -132,6 +132,7 @@ public class Controller {
         //set change address select.
         List<String> addressList = infinitecoin.wallet().getKeys().stream().map(k->k.toAddress(Main.params).toString()).collect(Collectors.toList());
         sendMoneyController.changeAddress.setItems(FXCollections.observableArrayList(addressList));
+        sendMoneyController.changeAddress.getSelectionModel().selectFirst();
         //set transfer amount
         sendMoneyController.amount.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
     }
