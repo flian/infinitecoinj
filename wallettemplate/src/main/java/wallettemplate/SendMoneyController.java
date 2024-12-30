@@ -73,8 +73,8 @@ public class SendMoneyController {
             //Wallet.SendRequest req = Wallet.SendRequest.emptyWallet(destination);
             Wallet.SendRequest req = Wallet.SendRequest.to(destination,Utils.toNanoCoins(amountStr));
             //set fee and fee perKb to 1
-            req.fee = BigInteger.ONE;
-            req.feePerKb = BigInteger.ONE;
+            req.fee = Utils.toNanoCoins("1");
+            req.feePerKb = Utils.toNanoCoins("1");
             req.emptyWallet = false;
             log.info("set change address:{}",changeAddress.getValue());
             req.changeAddress = new Address(Main.params, changeAddress.getValue());
