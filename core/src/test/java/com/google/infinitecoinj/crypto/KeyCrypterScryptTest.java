@@ -19,8 +19,8 @@ import com.google.infinitecoinj.core.Utils;
 import com.google.infinitecoinj.utils.BriefLogFormatter;
 import com.google.protobuf.ByteString;
 
-import org.bitcoinj.wallet.Protos;
-import org.bitcoinj.wallet.Protos.ScryptParameters;
+import org.infinitecoinj.wallet.Protos;
+import org.infinitecoinj.wallet.Protos.ScryptParameters;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;

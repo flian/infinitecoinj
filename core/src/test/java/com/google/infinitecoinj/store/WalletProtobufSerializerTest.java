@@ -10,7 +10,7 @@ import com.google.infinitecoinj.utils.BriefLogFormatter;
 import com.google.infinitecoinj.utils.TestUtils;
 import com.google.infinitecoinj.utils.Threading;
 import com.google.protobuf.ByteString;
-import org.bitcoinj.wallet.Protos;
+import org.infinitecoinj.wallet.Protos;
 import org.junit.Before;
 import org.junit.Test;
 

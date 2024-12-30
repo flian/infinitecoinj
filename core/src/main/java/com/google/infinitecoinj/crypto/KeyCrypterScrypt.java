@@ -18,9 +18,9 @@ package com.google.infinitecoinj.crypto;
 
 import com.google.protobuf.ByteString;
 import com.lambdaworks.crypto.SCrypt;
-import org.bitcoinj.wallet.Protos;
-import org.bitcoinj.wallet.Protos.ScryptParameters;
-import org.bitcoinj.wallet.Protos.Wallet.EncryptionType;
+import org.infinitecoinj.wallet.Protos;
+import org.infinitecoinj.wallet.Protos.ScryptParameters;
+import org.infinitecoinj.wallet.Protos.Wallet.EncryptionType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongycastle.crypto.BufferedBlockCipher;

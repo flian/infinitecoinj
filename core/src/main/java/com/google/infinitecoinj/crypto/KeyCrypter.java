@@ -17,7 +17,7 @@ package com.google.infinitecoinj.crypto;
 
 import java.io.Serializable;
 
-import org.bitcoinj.wallet.Protos.Wallet.EncryptionType;
+import org.infinitecoinj.wallet.Protos.Wallet.EncryptionType;
 import org.spongycastle.crypto.params.KeyParameter;
 
 /**
