@@ -75,7 +75,7 @@ public class CoinDefinition {
 
 
     public static final BigInteger DEFAULT_MIN_TX_FEE = BigInteger.valueOf(10000000000L);   // MIN_TX_FEE 100 coins   * 200
-    public static final BigInteger DUST_LIMIT =        BigInteger.valueOf(100000000000L);      //   1000 coins
+    public static final BigInteger DUST_LIMIT =        BigInteger.valueOf(1000000000L);      //   10 coins
 
     public static final int PROTOCOL_VERSION = 69003;          //version.h PROTOCOL_VERSION
     public static final int MIN_PROTOCOL_VERSION = 69001;        //version.h MIN_PROTO_VERSION

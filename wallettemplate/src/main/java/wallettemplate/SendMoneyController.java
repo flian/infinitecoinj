@@ -68,12 +68,13 @@ public class SendMoneyController {
             //set fee and fee perKb to 1
             req.fee = BigInteger.ONE;
             req.feePerKb = BigInteger.ONE;
-            Main.infinitecoin.wallet().sendCoins(req);
+            log.info("set change address:{}",changeAddress.getValue());
+            req.changeAddress = new Address(Main.params, changeAddress.getValue());
             if(infinitecoin.wallet().isEncrypted()){
                 req.aesKey = infinitecoin.wallet().getKeyCrypter().deriveKey(typedPassword);
             }
-            log.info("set change address:{}",changeAddress.getValue());
-            req.changeAddress = new Address(Main.params, changeAddress.getValue());
+            sendResult = Main.infinitecoin.wallet().sendCoins(req);
+
             Futures.addCallback(sendResult.broadcastComplete, new FutureCallback<Transaction>() {
                 @Override
                 public void onSuccess(Transaction result) {
