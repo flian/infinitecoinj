@@ -75,6 +75,7 @@ public class SendMoneyController {
             //set fee and fee perKb to 1
             req.fee = BigInteger.ONE;
             req.feePerKb = BigInteger.ONE;
+            req.emptyWallet = false;
             log.info("set change address:{}",changeAddress.getValue());
             req.changeAddress = new Address(Main.params, changeAddress.getValue());
             if(infinitecoin.wallet().isEncrypted()){
