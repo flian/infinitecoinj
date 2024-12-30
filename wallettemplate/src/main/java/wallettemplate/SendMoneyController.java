@@ -11,6 +11,7 @@ import wallettemplate.controls.BitcoinAddressValidator;
 
 import java.math.BigInteger;
 
+import static com.google.infinitecoinj.core.CoinDefinition.DUST_LIMIT;
 import static wallettemplate.Main.infinitecoin;
 import static wallettemplate.utils.GuiUtils.crashAlert;
 import static wallettemplate.utils.GuiUtils.informationalAlert;
@@ -60,11 +61,17 @@ public class SendMoneyController {
             showAlertMsg("password is not right,please try again?!!!");
             return;
         }
+        String amountStr = amount.getText().replaceAll(",","");
+        if(DUST_LIMIT.compareTo(Utils.toNanoCoins(amountStr))>0){
+            //dust transaction is not allow for now..
+            showAlertMsg("min send 1000ifc for now, it will be trande as dust lest than 1000 and confirm..");
+            return;
+        }
         try {
             Address destination = new Address(Main.params, address.getText());
-            log.info("send coin to address:{},amount:{}",address.getText(),amount.getText());
+            log.info("send coin to address:{},amount:{}",address.getText(),amountStr);
             //Wallet.SendRequest req = Wallet.SendRequest.emptyWallet(destination);
-            Wallet.SendRequest req = Wallet.SendRequest.to(destination,Utils.toNanoCoins(amount.getText()));
+            Wallet.SendRequest req = Wallet.SendRequest.to(destination,Utils.toNanoCoins(amountStr));
             //set fee and fee perKb to 1
             req.fee = BigInteger.ONE;
             req.feePerKb = BigInteger.ONE;
