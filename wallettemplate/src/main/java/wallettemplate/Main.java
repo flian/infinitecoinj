@@ -1,6 +1,6 @@
 package wallettemplate;
 
-import com.aquafx_project.AquaFx;
+
 import com.google.infinitecoinj.core.NetworkParameters;
 import com.google.infinitecoinj.kits.WalletAppKit;
 import com.google.infinitecoinj.params.MainNetParams;
