@@ -33,7 +33,7 @@ public class Main extends Application {
 
     public static NetworkParameters params = MainNetParams.get();
     public static String walletFolder = "mainNet";
-    public boolean loadCheckPoint = false;
+    public boolean loadCheckPoint = true;
 
     public static WalletAppKit infinitecoin;
     public static Main instance;
@@ -98,7 +98,7 @@ public class Main extends Application {
             // last months worth or more (takes a few seconds).
             if(loadCheckPoint){
                 log.info("enable checkpoint,load checkPoint...");
-                infinitecoin.setCheckpoints(getClass().getResourceAsStream("mainNet/checkpoints"));
+                infinitecoin.setCheckpoints(getClass().getClassLoader().getResourceAsStream("mainNet/checkpoints_20250118"));
                 log.info("enable checkpoint,load checkPoint done");
             }
         }
