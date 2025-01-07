@@ -117,9 +117,25 @@ public class CoinDefinition {
     static public String[] dnsSeeds = new String[] {
 
             //"treasurequarry.com",
-            "exploretheblocks.com",
-            "94.23.16.150",
-
+            //"exploretheblocks.com",
+            //"94.23.16.150",
+            "infinitecoin.com", "dnsseed.infinitecoin.com",
+            "ifcf2pool.com", "dnsseed.ifcf2pool.com",
+            "ifcp2pool.com", "dnsseed.ifcp2pool.com",
+            "amxpool.com", "dnsseed.amxpool.com",
+            "amzpool.com", "dnsseed.amzpool.com",
+            "bmapool.com", "dnsseed.bmapool.com",
+            "dyjykj.com", "dnsseed.dyjykj.com",
+            "coinwk.com", "dnsseed.coinwk.com",
+            "poolwk.com", "dnsseed.poolwk.com",
+            "znjjsc.com", "dnsseed.znjjsc.com",
+            "amxdns.com", "dnsseed.amxdns.com",
+            "smpool.com", "dnsseed.smpool.com",
+            "wxbkc.com", "dnsseed.wxbkc.com",
+            "ifcqd.com", "dnsseed.ifcqd.com",
+            "wwifc.com", "dnsseed.wwifc.com",
+            "hchccoin.com", "dnsseed.hchccoin.com",
+            "By5002.com", "dnsseed.By5002.com",
     };
     public static int minBroadcastConnections = 1;   //0 for default; we need more peers.
 
@@ -199,6 +215,17 @@ public class CoinDefinition {
 		checkpoints.put	(380962, new Sha256Hash("a032a87b430091fbb4faa20f16c8247f93cfcc1854bd49a19c3c9fc3a0c43634"));
 		checkpoints.put	(453211, new Sha256Hash("ea08eace1b78c5513d74750c7cfc01d0c1f3789fc650ccce197b85497405ce56"));
 
+        checkpoints.put	(647000, new Sha256Hash("667fc19d6066d472176136f2a34dac9b2662e9d7212df3679e56042d8b198906"));
+        checkpoints.put	(4333333, new Sha256Hash("8e4fcf3e003293882dec8943e42ed29e066cfc3782ff4d011c58c8b8ed9bb9a4"));
+        checkpoints.put	(4368037, new Sha256Hash("b60d656dcc3fdd60b279a7de7ad8c21950c4cbae58698219785249e0174d4bcd"));
+        checkpoints.put	(5781980, new Sha256Hash("a91e780de0b3f91f1b0515e56296b54804730cdfd21a45b4d2c433a3f92aebb7"));
+        checkpoints.put	(6043693, new Sha256Hash("5518c133fead075e372027e69c2b245a01d5a6e95ef3c97d576bf42a62d1e6ef"));
+        checkpoints.put	(6887217, new Sha256Hash("58edc430d6ecc35ae3fa4d8ccdfb8a42752ff771d2a08c8e6dc1f1b3b6782d4d"));
+        checkpoints.put	(7081698, new Sha256Hash("4342f79249ffe1c4afe08fca143ee9945579528a9047afc0e79ef276ea6fde6b"));
+        checkpoints.put	(7900916, new Sha256Hash("185d45e33bb5c8546b0923bd9c31c64c1b11eba2ae51afe549ce3e5aba63f70e"));
+        checkpoints.put	(8578526, new Sha256Hash("a5d4766c2e9ba13efd942f2bfcb1849ce824b54130c9de3c15e80afec0f81aa5"));
+        checkpoints.put	(9983739, new Sha256Hash("7ab96e7972bae3d3100fc2997fc8d9036955330e6a18c9c10a0c2c96d780c976"));
+        checkpoints.put	(10096530, new Sha256Hash("320a5d057453df2c5e46d24a62b959bc1c4948dddf96f6f0d1489f86d517b565"));
     }
 
     //Unit Test Information
