@@ -24,6 +24,7 @@ import wallettemplate.utils.TextFieldValidator;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 
 import static wallettemplate.utils.GuiUtils.*;
 
@@ -102,7 +103,7 @@ public class Main extends Application {
                 log.info("enable checkpoint,load checkPoint done");
             }
         }
-
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         // Now configure and start the appkit. This will take a second or two - we could show a temporary splash screen
         // or progress widget to keep the user engaged whilst we initialise, but we don't.
         infinitecoin.setDownloadListener(controller.progressBarUpdater())
@@ -113,6 +114,7 @@ public class Main extends Application {
         infinitecoin.wallet().allowSpendingUnconfirmedTransactions();
         infinitecoin.peerGroup().setMaxConnections(11);
         System.out.println(infinitecoin.wallet());
+        System.out.println("wallet earliest create time:"+df.format(infinitecoin.wallet().getEarliestKeyCreationTime()*1000));
         controller.onBitcoinSetup();
         mainWindow.show();
     }
